@@ -5,7 +5,7 @@ export default function Teste() {
     const [value, setValue] = useState([]);
 
     // salvar item
-    const addItems = () => {
+    const addItens = () => {
       if(localStorage.getItem('lists') == null){
         var list = []
         list.push(value)
@@ -21,8 +21,8 @@ export default function Teste() {
 
     // retornar item
     const listarItens = () => {
+      // retornando item da lista
       const reclist = JSON.parse(localStorage.getItem('lists'))
-      // console.log(reclist)
       const arr = []
       for(let i=0; i < reclist.length; i++){
         arr.push(reclist[i])
@@ -34,6 +34,7 @@ export default function Teste() {
     const removeItem = () => {
       const listando = JSON.parse(localStorage.getItem('lists'))
       console.log(listando.length)
+      // removendo o ultimo item
       listando.splice(listando.length - 1, 1)
       localStorage.setItem('lists', JSON.stringify(listando))
       listarItens()
@@ -47,13 +48,12 @@ export default function Teste() {
             <input
               placeholder='O que você quer salvar?'
               value={value} 
-              id='valor'
               type="text" 
               onChange={e => setValue(e.target.value)} 
-              />
-            <button onClick={addItems}>Salvar</button>
-            <button onClick={listarItens}>Listar</button>
-            <button onClick={removeItem}>Remover</button>
+            />
+            <button onClick={addItens}> Salvar </button>
+            <button onClick={listarItens}>Listar </button>
+            <button onClick={removeItem}>Remover </button>
             <p id="lista"></p>
           </div>
       </div>
