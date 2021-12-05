@@ -1,22 +1,25 @@
 import React, {useState} from 'react'
+import './App.css'
 
 export default function Teste() {
     const [value, setValue] = useState([]);
 
-    // add localStorage
+    // salvar item
     const addItems = () => {
       if(localStorage.getItem('lists') == null){
         var list = []
         list.push(value)
         localStorage.setItem('lists', JSON.stringify(list))
+        setValue('')
       }else{
         var list = JSON.parse(localStorage.getItem('lists'))
         list.push(value)
         localStorage.setItem('lists', JSON.stringify(list))
+        setValue('')
       }
     }
 
-    // get localStorage
+    // retornar item
     const listarItens = () => {
       const reclist = JSON.parse(localStorage.getItem('lists'))
       // console.log(reclist)
@@ -27,7 +30,7 @@ export default function Teste() {
       document.getElementById('lista').innerHTML = arr
     }
 
-    // remove 
+    // remover item
     const removeItem = () => {
       const listando = JSON.parse(localStorage.getItem('lists'))
       console.log(listando.length)
@@ -39,15 +42,20 @@ export default function Teste() {
      
     return (
       <div>
-        <h1>Hello React with Local Storage!</h1>
-            <input 
+        <h1>Local Storage</h1>
+          <div className="container">
+            <input
+              placeholder='O que você quer salvar?'
               value={value} 
+              id='valor'
               type="text" 
-              onChange={e => setValue(e.target.value)} />
-            <button onClick={addItems}>Adicionar</button><br/>
+              onChange={e => setValue(e.target.value)} 
+              />
+            <button onClick={addItems}>Salvar</button>
             <button onClick={listarItens}>Listar</button>
             <button onClick={removeItem}>Remover</button>
-        <p id="lista"></p>
+            <p id="lista"></p>
+          </div>
       </div>
     );
   };
